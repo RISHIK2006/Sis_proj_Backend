@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RideSync
 
-## Getting Started
+Campus ride-sharing prototype: **Next.js** frontend + **Spring Boot** backend + **MySQL**.
 
-First, run the development server:
+## Quick start
+
+### 1. Database
+
+Import the schema from [RideSync-Database](https://github.com/b-shiva-prasad/RideSync-Database) into MySQL database `ridesync`.
+
+### 2. Backend
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cd BACKEND
+export DB_URL=jdbc:mysql://localhost:3306/ridesync
+export DB_USERNAME=root
+export DB_PASSWORD=your_password
+# optional:
+export GEMINI_API_KEY=your_key
+./mvnw spring-boot:run
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+See [BACKEND/README.md](BACKEND/README.md) for API docs and demo flow.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### 3. Frontend
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+cp .env.example .env.local
+npm install
+npm run dev
+```
 
-## Learn More
+Open [http://localhost:3000/login](http://localhost:3000/login).
 
-To learn more about Next.js, take a look at the following resources:
+## Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Register / Login (BCrypt + MySQL)
+- Profile
+- Post Ride (auto vehicle creation)
+- Search & Book Ride
+- Booking History
+- AI Assistant (Gemini + local fallback)
+- Smart recommendations (rule-based)
