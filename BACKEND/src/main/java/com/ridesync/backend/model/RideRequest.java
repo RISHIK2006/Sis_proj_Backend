@@ -35,8 +35,9 @@ public class RideRequest {
     @JoinColumn(name = "passenger_id", nullable = false)
     private User passenger;
 
+    // DB: TINYINT UNSIGNED — Java Byte maps to JDBC TINYINT (Integer would validate as INTEGER)
     @Column(name = "seats_requested", nullable = false)
-    private Integer seatsRequested = 1;
+    private Byte seatsRequested = (byte) 1;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "request_status", nullable = false, columnDefinition = "ENUM('PENDING','ACCEPTED','REJECTED','CANCELLED')")
@@ -60,7 +61,7 @@ public class RideRequest {
             requestStatus = RequestStatus.PENDING;
         }
         if (seatsRequested == null) {
-            seatsRequested = 1;
+            seatsRequested = (byte) 1;
         }
     }
 
@@ -89,11 +90,11 @@ public class RideRequest {
     }
 
     public Integer getSeatsRequested() {
-        return seatsRequested;
+        return seatsRequested == null ? null : seatsRequested.intValue();
     }
 
     public void setSeatsRequested(Integer seatsRequested) {
-        this.seatsRequested = seatsRequested;
+        this.seatsRequested = seatsRequested == null ? null : seatsRequested.byteValue();
     }
 
     public RequestStatus getRequestStatus() {

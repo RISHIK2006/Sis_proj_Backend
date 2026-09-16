@@ -43,8 +43,9 @@ public class Vehicle {
     @Column(name = "color", length = 30)
     private String color;
 
+    // DB: TINYINT UNSIGNED — Java Byte maps to JDBC TINYINT
     @Column(name = "total_seats", nullable = false)
-    private Integer totalSeats;
+    private Byte totalSeats;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
@@ -111,11 +112,11 @@ public class Vehicle {
     }
 
     public Integer getTotalSeats() {
-        return totalSeats;
+        return totalSeats == null ? null : totalSeats.intValue();
     }
 
     public void setTotalSeats(Integer totalSeats) {
-        this.totalSeats = totalSeats;
+        this.totalSeats = totalSeats == null ? null : totalSeats.byteValue();
     }
 
     public LocalDateTime getCreatedAt() {

@@ -42,11 +42,12 @@ public class Ride {
     @Column(name = "departure_time", nullable = false)
     private LocalDateTime departureTime;
 
+    // DB: TINYINT UNSIGNED — Java Byte maps to JDBC TINYINT
     @Column(name = "total_seats", nullable = false)
-    private Integer totalSeats;
+    private Byte totalSeats;
 
     @Column(name = "seats_available", nullable = false)
-    private Integer seatsAvailable;
+    private Byte seatsAvailable;
 
     @Column(name = "fare_per_seat", nullable = false, precision = 8, scale = 2)
     private BigDecimal farePerSeat;
@@ -135,19 +136,19 @@ public class Ride {
     }
 
     public Integer getTotalSeats() {
-        return totalSeats;
+        return totalSeats == null ? null : totalSeats.intValue();
     }
 
     public void setTotalSeats(Integer totalSeats) {
-        this.totalSeats = totalSeats;
+        this.totalSeats = totalSeats == null ? null : totalSeats.byteValue();
     }
 
     public Integer getSeatsAvailable() {
-        return seatsAvailable;
+        return seatsAvailable == null ? null : seatsAvailable.intValue();
     }
 
     public void setSeatsAvailable(Integer seatsAvailable) {
-        this.seatsAvailable = seatsAvailable;
+        this.seatsAvailable = seatsAvailable == null ? null : seatsAvailable.byteValue();
     }
 
     public BigDecimal getFarePerSeat() {
